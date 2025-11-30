@@ -1,54 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiUsers, FiClipboard, FiSettings, FiMenu } from "react-icons/fi";
+import {
+  FiHome,
+  FiUsers,
+  FiGrid,
+  FiUserPlus,
+  FiSettings,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 
 const Sidebar = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // AUTO EXPAND WHEN SWITCHING TO DESKTOP
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(true); // force open on desktop
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const menuItems = [
-    { name: "Dashboard", icon: <FiHome />, path: "/dashboard" },
-    { name: "Patients", icon: <FiUsers />, path: "/patients" },
-    { name: "Doctors", icon: <FiClipboard />, path: "/doctors" },
-    { name: "Departments", icon: <FiClipboard />, path: "/departments" },
-    { name: "Settings", icon: <FiSettings />, path: "/settings/profile" },
+    { name: "Dashboard", icon: <FiHome className="md:w-[22px] md:h-[22px] w-[18px] h-[18px]" />, path: "/dashboard" },
+    { name: "Patients", icon: <FiUsers className="md:w-[22px] md:h-[22px] w-[18px] h-[18px]" />, path: "/patients" },
+    { name: "Doctors", icon: <FiUserPlus className="md:w-[22px] md:h-[22px] w-[18px] h-[18px]" />, path: "/doctors" },
+    { name: "Departments", icon: <FiGrid className="md:w-[22px] md:h-[22px] w-[18px] h-[18px]" />, path: "/departments" },
+    { name: "Settings", icon: <FiSettings className="md:w-[22px] md:h-[22px] w-[18px] h-[18px]" />, path: "/settings" },
   ];
 
   return (
     <>
-      {/* Mobile menu button */}
-      <div className="md:hidden flex justify-between items-center bg-gray-800 text-white p-4">
-        <h1 className="text-2xl font-bold">HMS</h1>
-        <button onClick={() => setIsOpen(!isOpen)}>
-          <FiMenu size={28} />
-        </button>
-      </div>
-
-      {/* Sidebar */}
       <div
-        className={`bg-gray-800 text-white h-screen p-4 flex flex-col fixed md:relative top-0 left-0 z-50
-          ${isOpen ? "w-64" : "w-0"} md:w-1/5 transition-all duration-300 overflow-hidden`}
+        className={`
+          fixed top-0 left-0 h-screen bg-[#0D1224] z-50 text-white
+          flex flex-col py-6 transition-all duration-300
+          ${isOpen ? "w-[20%] min-w-[240px]" : "w-[85px]"}
+          rounded-r-[15px]
+        `}
       >
-        <h1 className="text-2xl font-bold mb-8 text-center hidden md:block">HMS</h1>
-        <nav className="flex flex-col gap-2">
-          {menuItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-700 transition-colors ${
-                location.pathname === item.path ? "bg-gray-700" : ""
-              }`}
-              onClick={() => setIsOpen(false)} // Close menu on mobile
-            >
-              {item.icon}
-              <span className="hidden md:inline">{item.name}</span>
-            </Link>
-          ))}
+        {/* TOP AREA */}
+        <div className="flex items-center justify-between px-4">
+          
+          {/* Logo responsive */}
+          <div className="font-bold text-blue-500 text-xl lg:text-2xl">
+            HMS
+          </div>
+
+          {/* Toggle Button - smaller + mobile only */}
+          <button
+            onClick={handleToggle}
+            className="
+              lg:hidden 
+              bg-white text-black 
+              p-[2px] rounded-md shadow ml-3
+              flex items-center justify-center
+              border border-blue-500
+            "
+          >
+            {isOpen ? (
+              <FiChevronLeft size={16} />
+            ) : (
+              <FiChevronRight size={16} />
+            )}
+          </button>
+        </div>
+
+        {/* MENU ITEMS */}
+        <nav className="mt-8 flex flex-col gap-[20px]">
+          {menuItems.map((item) => {
+            const active = pathname === item.path;
+            return (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`
+                  relative flex items-center gap-4 
+                  pl-7 pr-1 py-3 
+                  w-[90%] mx-auto
+                  rounded-[12px] transition-all
+                  ${active ? "bg-white text-black" : "text-white hover:bg-[#1A2340]"}
+                `}
+              >
+                {/* ICON - centered perfectly */}
+                <span className="flex items-center justify-center">
+                  {item.icon}
+                </span>
+
+                {isOpen && (
+                  <span className={`text-[16px] ${active ? "text-black" : "text-white"}`}>
+                    {item.name}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
       </div>
 
-      {/* Overlay for mobile */}
-      {isOpen && <div className="fixed inset-0 bg-black opacity-50 md:hidden" onClick={() => setIsOpen(false)}></div>}
+      {/* CONTENT SPACING */}
+      <div
+        className={`${isOpen ? "ml-[20%]" : "ml-[80px]"} transition-all duration-300`}
+      ></div>
     </>
   );
 };
