@@ -1,9 +1,11 @@
-const Dashboard = () => {
-  return (
-    <div className="text-center mt-20 text-3xl text-gray-800">
-      Dashboard works!
-    </div>
-  );
-};
+import React from 'react'
 
-export default Dashboard;
+function Dashboard() {
+  return (
+    <div>
+      Dashboard.....
+    </div>
+  )
+}
+
+export default Dashboard

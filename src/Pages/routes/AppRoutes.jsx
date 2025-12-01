@@ -6,6 +6,7 @@
 
 // // Auth
 // import Login from "../Auth/Login.jsx";
+// import Signup from "../Auth/Signup.jsx";
 
 // // Dashboard
 // import Dashboard from "../dashboard/Dashboard";
@@ -34,10 +35,11 @@
 //   return (
 //     <Routes>
 
-//       {/* - Public Route (No Layout) - */}
+//       {/* ---- Public Auth Routes (No Layout) ---- */}
 //       <Route path="/" element={<Login />} />
+//       <Route path="/signup" element={<Signup />} />
 
-//       {/* - Protected Routes (With Layout) - */}
+//       {/* ---- Protected Routes (Inside Layout) ---- */}
 //       <Route element={<Layout />}>
 
 //         {/* Dashboard */}
@@ -64,7 +66,7 @@
 
 //       </Route>
 
-//       {/* Fallback 404 */}
+//       {/* 404 Fallback */}
 //       <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
 //     </Routes>
@@ -72,6 +74,7 @@
 // };
 
 // export default AppRoutes;
+
 
 
 import React from "react";
