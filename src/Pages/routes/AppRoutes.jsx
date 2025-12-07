@@ -57,7 +57,7 @@ const AppRoutes = ({ patients, setPatients, doctors, setDoctors }) => {
         <Route path="/departments/add" element={<AddDepartments />} />
 
         {/* Settings */}
-        <Route path="/settings/profile" element={<ProfileSettings />} />
+        <Route path="/settings" element={<ProfileSettings />} />
 
       </Route>
 
