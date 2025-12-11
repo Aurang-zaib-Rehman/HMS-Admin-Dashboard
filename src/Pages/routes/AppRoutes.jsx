@@ -26,7 +26,7 @@ import DepartmentsList from "../Departments/DepartmentsList";
 import AddDepartments from "../Departments/AddDepartments";
 
 // Settings
-import ProfileSettings from "../Settings/ProfileSettings";
+import ProfileSettings from "../settings/ProfileSettings.jsx";
 
 const AppRoutes = ({ patients, setPatients, doctors, setDoctors }) => {
   return (

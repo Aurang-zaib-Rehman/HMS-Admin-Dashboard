@@ -92,3 +92,8 @@ const DepartmentsList = () => {
 };
 
 export default DepartmentsList;
+
+
+
+
+
