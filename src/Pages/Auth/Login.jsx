@@ -7,33 +7,42 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePassword = () => setPasswordVisible(!passwordVisible);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const togglePassword = () => setPasswordVisible(!passwordVisible);
+  // Email Validation Function
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const savedUser = JSON.parse(localStorage.getItem("hms-user"));
-
-    if (!savedUser) {
-      return setError("No account found. Please sign up first.");
+    if (!isValidEmail(email)) {
+      return setError("Please enter a valid email like example@gmail.com");
     }
 
-    if (savedUser.email !== email || savedUser.password !== password) {
+    const users = JSON.parse(localStorage.getItem("hms-users")) || [];
+
+    // Find matching user
+    const userFound = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (!userFound) {
       return setError("Invalid email or password.");
     }
 
+    // Save logged-in user
+    localStorage.setItem("hms-user", JSON.stringify(userFound));
     localStorage.setItem("hms-auth", true);
+
     navigate("/dashboard");
   };
 
   return (
     <div className="min-h-screen flex bg-white">
-      {/* LEFT SIDE IMAGE */}
       <div className="hidden md:block w-1/2">
         <img
           src={loginImg}
@@ -42,7 +51,6 @@ const Login = () => {
         />
       </div>
 
-      {/* RIGHT SIDE FORM */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-8">
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.25)] animate-fadeIn">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-1">
@@ -58,8 +66,6 @@ const Login = () => {
           )}
 
           <form onSubmit={handleLogin} className="space-y-5">
-
-            {/* Username */}
             <div>
               <label className="block mb-1 text-gray-700">Email</label>
               <input
@@ -71,10 +77,8 @@ const Login = () => {
               />
             </div>
 
-            {/* PASSWORD + EYE ICON */}
             <div>
               <label className="block mb-1 text-gray-700">Password</label>
-
               <div className="relative">
                 <input
                   type={passwordVisible ? "text" : "password"}
@@ -93,7 +97,6 @@ const Login = () => {
               </div>
             </div>
 
-            {/* LOGIN BUTTON */}
             <button className="w-full bg-cyan-700 text-white py-3 rounded-lg text-lg font-semibold hover:bg-cyan-800 transition-all">
               Login
             </button>

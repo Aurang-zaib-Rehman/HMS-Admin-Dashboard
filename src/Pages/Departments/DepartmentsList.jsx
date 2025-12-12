@@ -57,8 +57,8 @@ const DepartmentsList = () => {
       </div>
 
       {/* Search + Add */}
-      <div className="flex items-center gap-4 mt-6 bg-white p-4 rounded-xl shadow-md border border-gray-100">
-        <div className="flex items-center gap-2 flex-grow">
+      <div className="flex items-center gap-4 mt-6 bg-white p-4 rounded-xl shadow-md border border-gray-100 flex-wrap">
+        <div className="flex items-center gap-2 flex-grow min-w-[150px]">
           <FiSearch className="text-gray-500" />
           <input
             type="text"
@@ -68,7 +68,7 @@ const DepartmentsList = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <button className="px-5 py-2 bg-blue-600 text-white flex items-center gap-2 rounded-lg hover:bg-blue-700">
+        <button className="px-3 md:px-5 py-1.5 md:py-2 bg-blue-600 text-white flex items-center gap-2 rounded-lg hover:bg-blue-700 text-sm md:text-base">
           <FiPlus /> Add Department
         </button>
       </div>
@@ -92,8 +92,3 @@ const DepartmentsList = () => {
 };
 
 export default DepartmentsList;
-
-
-
-
-
