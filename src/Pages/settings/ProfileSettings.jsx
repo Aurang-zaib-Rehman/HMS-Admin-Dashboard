@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiCamera, FiSave, FiEye, FiEyeOff } from "react-icons/fi";
-import defaultProfile from "../../assets/images/profile.jpg"; // <-- Your default image
+import defaultProfile from "../../assets/images/profile.png"; 
 
 const ProfileSettings = () => {
   const filePicker = useRef(null);
@@ -9,7 +9,7 @@ const ProfileSettings = () => {
   const [profile, setProfile] = useState({
     email: "",
     password: "",
-    image: defaultProfile, // default initially
+    image: defaultProfile,
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -55,8 +55,15 @@ const ProfileSettings = () => {
     const emailChanged = profile.email !== currentUser.email;
 
     if (emailChanged) {
-      users.push(profile);
+      const newProfile = {
+        ...profile,
+        image: profile.image || defaultProfile,
+      };
+
+      users.push(newProfile);
       users = users.filter((u) => u.email !== currentUser.email);
+
+      localStorage.setItem("hms-user", JSON.stringify(newProfile));
       alert("New account created with updated email!");
     } else {
       users = users.map((u) => (u.email === currentUser.email ? profile : u));
@@ -150,3 +157,8 @@ const ProfileSettings = () => {
 };
 
 export default ProfileSettings;
+
+
+
+
+

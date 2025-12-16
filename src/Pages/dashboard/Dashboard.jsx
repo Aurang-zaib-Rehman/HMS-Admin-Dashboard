@@ -6,7 +6,7 @@ import { Bar, Doughnut } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
 
-// Count-up animation component
+// Count-up 
 const CountUp = ({ value, duration = 1.5, className = "" }) => {
   const mv = useMotionValue(0);
   const rounded = useTransform(mv, (latest) => Math.round(latest));
@@ -24,7 +24,7 @@ const CountUp = ({ value, duration = 1.5, className = "" }) => {
   return <span className={className}>{display}</span>;
 };
 
-// Dummy patient data
+
 const initialPatients = [
   { id: 101, name: "Aisha Khan", age: 32, gender: "F", disease: "Appendicitis", surgery: true, status: "Admitted" },
   { id: 102, name: "Bilal Ahmed", age: 45, gender: "M", disease: "Hypertension", surgery: false, status: "Follow-up" },
@@ -46,18 +46,15 @@ const initialPatients = [
 const Dashboard = () => {
   const [patients, setPatients] = useState(initialPatients);
 
-  // Animation Variants
   const containerVariants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15 } } };
   const cardVariants = { hidden: { opacity: 0, y: 25 }, show: { opacity: 1, y: 0 } };
   const chartVariants = { hidden: { opacity: 0, scale: 0.95 }, show: { opacity: 1, scale: 1, transition: { duration: 0.5 } } };
   const rowVariants = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 }, exit: { opacity: 0, x: 30 } };
 
-  // Chart Options
   const baseChartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: "bottom", labels: { boxWidth: 10, padding: 8, font: { size: 11 }, usePointStyle: true } }, tooltip: { mode: "index", intersect: false } }, layout: { padding: { top: 8, right: 10, left: 10, bottom: 40 } } };
   const barChartOptions = { ...baseChartOptions, scales: { x: { ticks: { autoSkip: false, maxRotation: 45, font: { size: 11 } }, grid: { display: false } }, y: { beginAtZero: true, ticks: { font: { size: 11 } }, grid: { drawBorder: false } } } };
   const doughnutOptions = { ...baseChartOptions, plugins: { ...baseChartOptions.plugins, legend: { ...baseChartOptions.plugins.legend, labels: { ...baseChartOptions.plugins.legend.labels, font: { size: 11 }, boxWidth: 10 } } } };
 
-  // Dummy Chart Data
   const departments = ["Surgery", "Cardiology", "ENT", "Dermatology", "Neurology", "Pediatrics", "Orthopedics", "Gynecology", "Oncology", "Urology"];
   const departmentColors = ["#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4", "#F97316", "#E879F9", "#22D3EE", "#A3E635"];
   const barData = { labels: departments, datasets: [{ label: "Appointments", data: [30, 28, 25, 22, 20, 35, 24, 26, 18, 22], backgroundColor: departmentColors, borderRadius: 10 }] };
@@ -68,7 +65,6 @@ const Dashboard = () => {
   const revenueBarColors = revenueData.map((_, i) => i===currentMonthIndex ? "#F59E0B" : "#3B82F6");
   const revenueChartData = { labels: months, datasets: [ { type: "bar", label: "Monthly Revenue", data: revenueData, backgroundColor: revenueBarColors, borderRadius: 6 }, { type: "line", label: "Revenue Trend", data: revenueData, borderColor: "#10B981", borderWidth: 3, fill: false, tension: 0.3 } ] };
 
-  // Top Cards Stats
   const totalPatients = barData.datasets[0].data.reduce((a,b)=>a+b,0);
   const totalDoctors = doctorsData.datasets[0].data.reduce((a,b)=>a+b,0);
   const totalAppointmentsToday = 75;
@@ -115,11 +111,10 @@ const Dashboard = () => {
         </motion.div>
       </div>
 
-      {/* RECENT PATIENTS LIST - RESPONSIVE */}
+      {/* PATIENTS LIST */}
       <div className="space-y-2">
         <h2 className="text-lg font-semibold mb-2">Recently Admitted Patients</h2>
 
-        {/* Large screens: table */}
         <div className="hidden sm:block bg-white rounded-xl shadow-md border overflow-hidden">
           <table className="w-full text-left text-sm">
             <thead>
@@ -152,7 +147,6 @@ const Dashboard = () => {
                       }>{p.status}</span>
                     </td>
                     <td className="p-3 flex gap-2 justify-center">
-                      <button className="px-2 py-1 bg-gray-200 text-gray-800 rounded text-xs">Edit</button>
                       <button onClick={()=>handleDelete(p.id)} className="px-2 py-1 bg-red-200 text-red-700 rounded text-xs">Delete</button>
                     </td>
                   </motion.tr>
@@ -162,7 +156,7 @@ const Dashboard = () => {
           </table>
         </div>
 
-        {/* Small screens: stacked cards */}
+        {/* responsive */}
         <div className="sm:hidden space-y-2">
           <AnimatePresence>
             {displayedPatients.map((p)=>(
@@ -170,7 +164,6 @@ const Dashboard = () => {
                 <div className="flex justify-between items-start">
                   <span className="font-semibold text-sm">ID: {p.id}</span>
                   <div className="flex gap-1">
-                    <button className="px-2 py-1 bg-gray-200 text-gray-800 rounded text-xs">Edit</button>
                     <button onClick={()=>handleDelete(p.id)} className="px-2 py-1 bg-red-200 text-red-700 rounded text-xs">Delete</button>
                   </div>
                 </div>

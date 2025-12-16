@@ -15,7 +15,7 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
     status: "Admitted",
   });
 
-  // Prefill form for editing
+ 
   useEffect(() => {
     if (isEdit && id) {
       const patient = patients.find((p) => p.id === parseInt(id));
@@ -34,16 +34,14 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEdit) {
-      // Update patient
       setPatients((prev) =>
         prev.map((p) => (p.id === parseInt(id) ? { ...formData, id: p.id } : p))
       );
     } else {
-      // Add new patient
       const newId = patients.length ? Math.max(...patients.map((p) => p.id)) + 1 : 101;
       setPatients((prev) => [...prev, { ...formData, id: newId }]);
     }
-    navigate("/patients"); // Redirect back to patient list
+    navigate("/patients");
   };
 
   return (
@@ -54,7 +52,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
 
       <form onSubmit={handleSubmit} className="space-y-5">
 
-        {/* Name */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Name</label>
           <input
@@ -67,7 +64,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           />
         </div>
 
-        {/* Age */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Age</label>
           <input
@@ -80,7 +76,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           />
         </div>
 
-        {/* Disease */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Disease</label>
           <input
@@ -93,7 +88,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           />
         </div>
 
-        {/* Gender */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Gender</label>
           <select
@@ -107,7 +101,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           </select>
         </div>
 
-        {/* Surgery */}
         <div className="flex items-center gap-3">
           <input
             type="checkbox"
@@ -119,7 +112,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           <label className="text-gray-700 font-medium">Surgery</label>
         </div>
 
-        {/* Status */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Status</label>
           <select
@@ -134,7 +126,6 @@ const PatientForm = ({ patients, setPatients, isEdit = false }) => {
           </select>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl shadow-lg transition-all"

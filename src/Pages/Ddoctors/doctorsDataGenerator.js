@@ -1,4 +1,3 @@
-// Pages/Doctors/doctorsDataGenerator.js
 export const generateDoctorList = () => {
   const names = [
     "Ayesha Khan", "Bilal Ahmed", "Sara Malik", "Kamran Ali", "Fatima Noor",

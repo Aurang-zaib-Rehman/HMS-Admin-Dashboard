@@ -1,26 +1,3 @@
-// import { BrowserRouter } from "react-router-dom";
-// import AppRoutes from "./Pages/routes/AppRoutes";
-// import React from "react";
-
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <AppRoutes />
-//     </BrowserRouter>
-//   );
-// }
-
-// export default App;
-
-
-
-
-
-
-
-
-
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./Pages/routes/AppRoutes";
 import React, { useState } from "react";
@@ -47,10 +24,8 @@ const initialPatients = [
 function App() {
   const [patients, setPatients] = useState(initialPatients);
 
-  // ✅ Use the new generator
   const allDoctors = generateDoctorList();
 
-  // Mark first 14 as Available, rest as Absent
   allDoctors.forEach((doc, i) => {
     doc.status = i < 14 ? "Available" : "Absent";
   });

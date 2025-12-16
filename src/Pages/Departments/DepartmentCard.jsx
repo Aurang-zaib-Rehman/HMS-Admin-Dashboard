@@ -44,7 +44,6 @@ const DepartmentCard = ({ dept }) => {
           </p>
         </div>
 
-        {/* Bed Occupancy */}
         <div>
           <p className="text-sm text-gray-600 mb-1">Bed Occupancy</p>
           <div className="w-full bg-gray-200 h-2 rounded-full">
@@ -55,13 +54,11 @@ const DepartmentCard = ({ dept }) => {
           </div>
         </div>
 
-        {/* Location */}
         <div className="flex items-center gap-2 text-gray-700">
           <FiMapPin className="text-gray-500" />
           {dept.location || "-"}
         </div>
 
-        {/* Phone */}
         <div className="flex items-center gap-2 text-gray-700">
           <FiPhone className="text-gray-500" />
           {dept.phone || "-"}

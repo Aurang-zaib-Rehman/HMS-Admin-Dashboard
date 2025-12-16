@@ -23,13 +23,10 @@ const AddDoctors = ({ doctors, setDoctors }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Generate new ID
     const newId = doctors.length ? Math.max(...doctors.map((d) => d.id)) + 1 : 1;
 
-    // Add doctor
     setDoctors((prev) => [...prev, { ...formData, id: newId }]);
 
-    // Redirect to doctors list
     navigate("/doctors");
   };
 
@@ -38,7 +35,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Doctor</h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Name */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Name</label>
           <input
@@ -51,7 +47,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
           />
         </div>
 
-        {/* Department */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Department</label>
           <input
@@ -64,7 +59,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
           />
         </div>
 
-        {/* Shift */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Shift</label>
           <select
@@ -79,7 +73,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
           </select>
         </div>
 
-        {/* Charges */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Charges</label>
           <input
@@ -92,7 +85,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
           />
         </div>
 
-        {/* Status */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Status</label>
           <select
@@ -106,7 +98,6 @@ const AddDoctors = ({ doctors, setDoctors }) => {
           </select>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl shadow-lg transition-all"

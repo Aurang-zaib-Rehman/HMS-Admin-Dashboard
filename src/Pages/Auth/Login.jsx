@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Email Validation Function
+  // Email Validation 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleLogin = (e) => {
@@ -25,7 +25,7 @@ const Login = () => {
 
     const users = JSON.parse(localStorage.getItem("hms-users")) || [];
 
-    // Find matching user
+    // matching user
     const userFound = users.find(
       (u) => u.email === email && u.password === password
     );

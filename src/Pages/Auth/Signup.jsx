@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import signupImg from "../../assets/images/signup.jpg";
+import defaultProfile from "../../assets/images/profile.png"; 
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Signup = () => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
 
-  // Email Validation Function
+  // Email Validation 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSignup = (e) => {
@@ -33,7 +34,7 @@ const Signup = () => {
 
     let users = JSON.parse(localStorage.getItem("hms-users")) || [];
 
-    // Check if email already exists
+    // Check for email existace
     if (users.some((u) => u.email === email)) {
       return setError("This email is already registered. Please log in.");
     }
@@ -41,7 +42,7 @@ const Signup = () => {
     const newUser = {
       email,
       password,
-      image: "https://i.pravatar.cc/150?img=50" // default avatar
+      image: defaultProfile 
     };
 
     users.push(newUser);

@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 const DepartmentsList = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Assign patients to each department
   const [departments] = useState([
     { hodName: "Dr. Maria Garcia", department: "Oncology", doctors: 3, patients: 10, availableBeds: 7, totalBeds: 10, location: "Building C, Floor 3", phone: "+1 234 567 8907" },
     { hodName: "Dr. John Smith", department: "Cardiology", doctors: 4, patients: 12, availableBeds: 5, totalBeds: 10, location: "Building A, Floor 1", phone: "+1 234 567 8910" },
@@ -36,7 +35,7 @@ const DepartmentsList = () => {
       <h1 className="text-3xl font-semibold">Department Management</h1>
       <p className="text-gray-600 mt-1">Manage and monitor all hospital departments</p>
 
-      {/* Top Stats */}
+      {/* Top cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
         <div className="p-5 bg-white shadow-lg rounded-xl border border-gray-100">
           <p className="text-gray-600">Total Departments</p>
@@ -56,7 +55,7 @@ const DepartmentsList = () => {
         </div>
       </div>
 
-      {/* Search + Add */}
+      {/* Search */}
       <div className="flex items-center gap-4 mt-6 bg-white p-4 rounded-xl shadow-md border border-gray-100 flex-wrap">
         <div className="flex items-center gap-2 flex-grow min-w-[150px]">
           <FiSearch className="text-gray-500" />
@@ -69,11 +68,11 @@ const DepartmentsList = () => {
           />
         </div>
         <button className="px-3 md:px-5 py-1.5 md:py-2 bg-blue-600 text-white flex items-center gap-2 rounded-lg hover:bg-blue-700 text-sm md:text-base">
-          <FiPlus /> Add Department
+          Search 
         </button>
       </div>
 
-      {/* Department Cards Grid */}
+      {/* Cards*/}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"
         initial="hidden"
