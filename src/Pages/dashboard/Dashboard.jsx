@@ -1,10 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useTransform, animate, AnimatePresence } from "framer-motion";
 import { FaUserInjured, FaUserMd, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  LineController,    
+  BarController,     
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  LineController,   
+  BarController,     
+  Tooltip,
+  Legend
+);
 
 // Count-up 
 const CountUp = ({ value, duration = 1.5, className = "" }) => {
